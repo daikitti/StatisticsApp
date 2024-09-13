@@ -35,6 +35,8 @@
 		B617D1132C93415B00D721E1 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = B617D1122C93415B00D721E1 /* DGCharts */; };
 		B6FC1E832C93C34600461439 /* TopViewers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC1E822C93C34600461439 /* TopViewers.swift */; };
 		B6FC1E852C93C53600461439 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC1E842C93C53600461439 /* TopCell.swift */; };
+		B6FC1E872C93DE6B00461439 /* GenderAgeChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC1E862C93DE6B00461439 /* GenderAgeChartView.swift */; };
+		B6FC1E892C94061A00461439 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC1E882C94061A00461439 /* Date+String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		B617D10E2C92E70300D721E1 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		B6FC1E822C93C34600461439 /* TopViewers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewers.swift; sourceTree = "<group>"; };
 		B6FC1E842C93C53600461439 /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
+		B6FC1E862C93DE6B00461439 /* GenderAgeChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderAgeChartView.swift; sourceTree = "<group>"; };
+		B6FC1E882C94061A00461439 /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +137,7 @@
 		B617CFF92C9285F300D721E1 /* Statistics-App */ = {
 			isa = PBXGroup;
 			children = (
-				B617D0522C929CF700D721E1 /* Helper */,
+				B617D0522C929CF700D721E1 /* Extension */,
 				B617D0412C9293E400D721E1 /* Models */,
 				B617D0F32C92C08000D721E1 /* CustomViews */,
 				B617D0492C9298A500D721E1 /* MenuFlow */,
@@ -183,13 +187,14 @@
 			path = MenuFlow;
 			sourceTree = "<group>";
 		};
-		B617D0522C929CF700D721E1 /* Helper */ = {
+		B617D0522C929CF700D721E1 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				B617D0E42C92A1D300D721E1 /* Design+View.swift */,
 				B617D0E52C92A1D300D721E1 /* Font+Colors.swift */,
+				B6FC1E882C94061A00461439 /* Date+String.swift */,
 			);
-			path = Helper;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		B617D0542C929D4500D721E1 /* RealmStorage */ = {
@@ -206,6 +211,7 @@
 				B617D1092C92D47200D721E1 /* Cells+Components */,
 				B6FC1E812C93C1FB00461439 /* VisitorsForm+chart */,
 				B6FC1E822C93C34600461439 /* TopViewers.swift */,
+				B6FC1E862C93DE6B00461439 /* GenderAgeChartView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -371,12 +377,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B617D0E82C92A1D300D721E1 /* Font+Colors.swift in Sources */,
+				B6FC1E872C93DE6B00461439 /* GenderAgeChartView.swift in Sources */,
 				B617D0E62C92A1D300D721E1 /* Design+View.swift in Sources */,
 				B617CFFF2C9285F300D721E1 /* MenuView.swift in Sources */,
 				B617D0F12C92C01600D721E1 /* VisitorsFormView.swift in Sources */,
 				B617D1082C92D13D00D721E1 /* VisitorsСhart.swift in Sources */,
 				B6FC1E832C93C34600461439 /* TopViewers.swift in Sources */,
 				B617CFFB2C9285F300D721E1 /* AppDelegate.swift in Sources */,
+				B6FC1E892C94061A00461439 /* Date+String.swift in Sources */,
 				B617D0462C9294C800D721E1 /* UsersModel.swift in Sources */,
 				B617D10F2C92E70300D721E1 /* ChartView.swift in Sources */,
 				B617D0EE2C92B87D00D721E1 /* MenuController.swift in Sources */,

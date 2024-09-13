@@ -11,7 +11,7 @@ class MenuView: UIViewController {
         return label
     }()
     
-    private lazy var scrollView: UIScrollView = {
+     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.bounces = false
         scrollView.clipsToBounds = true
@@ -33,24 +33,21 @@ class MenuView: UIViewController {
     private lazy var chatForm: VisitorsСhart = {
         let view = VisitorsСhart()
         
-        let visitData = [
-                    (date: "01.09", visits: 10),
-                    (date: "04.09", visits: 15),
-                    (date: "01.09", visits: 7),
-                    (date: "04.09", visits: 12),
-                    (date: "03.10", visits: 25)
-                ]
-                
-        // Передаем данные в ChartView
-        view.chartView.setData(visitData: visitData)
         return view
     }()
     
-    private lazy var topViewers: TopViewers = {
+     lazy var topViewers: TopViewers = {
         let view = TopViewers()
-        view.configurate()
         return view
     }()
+    
+     lazy var genderAgeChartView: GenderAgeChartView = {
+        let view = GenderAgeChartView()
+        return view
+    }()
+    
+    var UsersData:[UserRealm] = [UserRealm]()
+    var StatisticData:[StatisticRealm] = [StatisticRealm]()
     
     let refreshControl = UIRefreshControl()
     var controller: MenuController?
@@ -75,7 +72,8 @@ extension MenuView: Designable {
         [statLabel,
          visitorsForm,
          chatForm,
-         topViewers].forEach(scrollContentView.addSubview)
+         topViewers,
+         genderAgeChartView].forEach(scrollContentView.addSubview)
     }
     
     func makeConstrains() {
@@ -110,8 +108,27 @@ extension MenuView: Designable {
         topViewers.snp.makeConstraints { make in
             make.top.equalTo(chatForm.snp.bottom).offset(20)
             make.leading.trailing.equalTo(statLabel)
+            make.height.equalTo(300)
+        }
+        
+        genderAgeChartView.snp.makeConstraints { make in
+            make.top.equalTo(topViewers.snp.bottom).offset(20)
+            make.leading.trailing.equalTo(statLabel)
             make.height.equalTo(400)
             make.bottom.equalToSuperview().inset(20)
         }
     }
+}
+
+extension MenuView{
+ 
+    func UpdateUI(statistics: [StatisticRealm], users:[UserRealm]){
+        self.StatisticData = statistics
+        self.UsersData = users
+        
+        visitorsForm.configurate(statistic: statistics)
+        chatForm.configurate(statistic: statistics)
+        topViewers.configurate(statistic: statistics, users: users )
+    }
+
 }

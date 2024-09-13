@@ -31,6 +31,7 @@ class VisitorsСhart:UIView{
     var typeDate:[DateItem] = DateSortList().getAllSortDate()
     var currentDateSort:typeSortDate = .forDays
     
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setUp()
@@ -106,6 +107,66 @@ extension VisitorsСhart: UICollectionViewDelegate, UICollectionViewDataSource,
     }
 }
 
-#Preview( body: {
-    VisitorsСhart()
-})
+extension VisitorsСhart {
+    func configurate(statistic: [StatisticRealm]) {
+        // Шаг 1: Собираем все даты в один массив
+        var allDates: [Int] = []
+        
+        statistic.forEach { stat in
+            stat.dates.forEach { date in
+                allDates.append(date)
+            }
+        }
+        
+        // Вывод всех собранных дат для отладки
+        print("Все даты: \(allDates)")
+        
+        // Шаг 2: Подсчитываем количество уникальных дат
+        var visitCounts: [String: Int] = [:]
+        
+        for dateInt in allDates {
+            // Преобразуем дату в строку
+            let dateString = String(dateInt)
+            let paddedDateString: String
+            
+            // Добавляем ведущий ноль, если длина даты — 7 символов
+            if dateString.count == 7 {
+                paddedDateString = "0\(dateString)"
+            } else {
+                paddedDateString = dateString
+            }
+            
+            // Извлекаем день и месяц
+            let day = paddedDateString.prefix(2) // Первые 2 символа — день
+            let month = paddedDateString.dropFirst(2).prefix(2) // Следующие 2 символа — месяц
+            
+            // Форматируем как "dd.MM"
+            let formattedDate = "\(day).\(month)"
+            
+            // Считаем посещения для каждой уникальной даты
+            if let count = visitCounts[formattedDate] {
+                visitCounts[formattedDate] = count + 1
+            } else {
+                visitCounts[formattedDate] = 1
+            }
+        }
+        
+        // Вывод подсчитанных посещений для каждой даты для отладки
+        print("Посчитанные посещения: \(visitCounts)")
+        
+        // Шаг 3: Преобразуем данные в формат, который ожидает chartView
+        var visitData: [(date: String, visits: Int)] = []
+        for (date, visits) in visitCounts {
+            visitData.append((date: date, visits: visits))
+        }
+        
+        // Шаг 4: Сортируем данные по дате
+        visitData.sort { $0.date < $1.date }
+        
+        // Вывод финальных данных для графика
+        print("Данные для графика: \(visitData)")
+        
+        // Шаг 5: Обновляем данные в chartView
+        chartView.setData(visitData: visitData)
+    }
+}

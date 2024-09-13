@@ -69,20 +69,50 @@ extension TopViewers: Designable {
 }
 
 extension TopViewers {
-    func configurate() {
+    func configurate(statistic: [StatisticRealm], users: [UserRealm]) {
         Vstack.subviews.forEach { view in
             view.removeFromSuperview()
         }
         
-        for _ in 0...2 {
+        // Шаг 1: Подсчитываем количество просмотров для каждого пользователя
+        var userVisits: [Int: Int] = [:] // Ключ - user_id, значение - количество просмотров
+        
+        for stat in statistic {
+            if stat.type == "view" { // Считаем только просмотры
+                if let currentCount = userVisits[stat.userID] {
+                    userVisits[stat.userID] = currentCount + stat.dates.count
+                } else {
+                    userVisits[stat.userID] = stat.dates.count
+                }
+            }
+        }
+        
+        // Шаг 2: Сортируем пользователей по количеству просмотров в порядке убывания
+        let sortedUsers = users.sorted { (user1, user2) -> Bool in
+            let visits1 = userVisits[user1.id] ?? 0
+            let visits2 = userVisits[user2.id] ?? 0
+            return visits1 > visits2 
+        }
+        
+        // Шаг 3: Берём только трёх пользователей с наибольшим количеством просмотров
+        let topUserViewvers = Array(sortedUsers.prefix(3))
+        
+        // Шаг 4: Конфигурируем ячейки для каждого пользователя
+        for user in topUserViewvers {
             let view = TopCell()
-            view.configurate(imagePath: "", name: "takoyaki", age: "23")
+            
+            guard let urlImage = user.file.first?.url else { return }
+            view.configurate(imagePath: urlImage, name: user.username, age: user.age)
             
             view.snp.makeConstraints { make in
-                        make.height.equalTo(60) 
-                    }
+                make.height.equalTo(60)
+            }
+            
             Vstack.addArrangedSubview(view)
         }
+        
+        // Обновляем констрейнты
         self.updateConstraints()
     }
 }
+

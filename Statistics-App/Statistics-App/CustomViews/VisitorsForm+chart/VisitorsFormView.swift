@@ -11,7 +11,7 @@ import SnapKit
 
 class VisitorsFormView:UIView {
     
-      private lazy var content: UIView = {
+    private lazy var content: UIView = {
         let view = UIView()
         return view
     }()
@@ -140,4 +140,43 @@ extension VisitorsFormView: Designable{
     }
     
     
+}
+
+
+import Foundation
+
+
+
+extension VisitorsFormView {
+    func configurate(statistic: [StatisticRealm]) {
+        var viewersCount = 0
+        
+        let currentMonth = Date().currentMonth
+        
+        
+        
+        for stat in statistic {
+            for dateInt in stat.dates {
+                let dateString = String(dateInt)
+                var paddedDateString: String
+                
+                if dateString.count == 7 {
+                    paddedDateString = "0\(dateString)"
+                } else {
+                    paddedDateString = "\(dateString)"
+                }
+                
+                let month = paddedDateString.monthFromDate() ?? ""
+                
+                if currentMonth == month {
+                    viewersCount += 1
+                } else {
+                    print("Не удалось преобразовать строку даты: \(paddedDateString)")
+                }
+            }
+        }
+        
+        // Обновляем текст в countVisitLabel
+        countVisitLabel.text = "\(viewersCount)"
+    }
 }

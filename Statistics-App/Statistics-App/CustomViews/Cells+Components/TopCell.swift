@@ -20,6 +20,7 @@ class TopCell: UIView{
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 25
         imageView.clipsToBounds = true
         return imageView
@@ -84,10 +85,37 @@ extension TopCell: Designable {
     }
 }
 
-extension TopCell{
-    func configurate(imagePath:String, name: String, age: String){
-        
+import UIKit
+
+extension TopCell {
+    func configurate(imagePath: String, name: String, age: Int) {
+        // Устанавливаем изображение по умолчанию
         self.avatarImageView.image = UIImage(named: "avatar")
-        self.titleName.text = "\(name)" + ", \(age)"
+        self.titleName.text = "\(name), \(age)"
+        
+        // Проверяем, можно ли создать URL из переданного imagePath
+        guard let url = URL(string: imagePath) else {
+            print("Неверный URL: \(imagePath)")
+            return
+        }
+        
+        // Загрузка изображения асинхронно
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            // Проверяем наличие ошибки или данных
+            if let error = error {
+                print("Ошибка при загрузке изображения: \(error)")
+                return
+            }
+            
+            guard let data = data, let image = UIImage(data: data) else {
+                print("Не удалось получить данные изображения")
+                return
+            }
+            
+            // Обновляем UI на главном потоке
+            DispatchQueue.main.async {
+                self.avatarImageView.image = image
+            }
+        }.resume()
     }
 }

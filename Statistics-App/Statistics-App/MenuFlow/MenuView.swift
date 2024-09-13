@@ -3,7 +3,7 @@ import SnapKit
 
 class MenuView: UIViewController {
     
-    private lazy var statLabel = {
+    private lazy var statLabel: UILabel = {
         let label = UILabel()
         label.text = "Статистика"
         label.font = CustomFonts.titleBold
@@ -35,17 +35,22 @@ class MenuView: UIViewController {
         
         let visitData = [
                     (date: "01.09", visits: 10),
-                    (date: "02.09", visits: 15),
-                    (date: "03.09", visits: 7),
+                    (date: "04.09", visits: 15),
+                    (date: "01.09", visits: 7),
                     (date: "04.09", visits: 12),
-                    (date: "05.09", visits: 5)
+                    (date: "03.10", visits: 25)
                 ]
                 
-                // Передаем данные в ChartView
+        // Передаем данные в ChartView
         view.chartView.setData(visitData: visitData)
         return view
     }()
     
+    private lazy var topViewers: TopViewers = {
+        let view = TopViewers()
+        view.configurate()
+        return view
+    }()
     
     let refreshControl = UIRefreshControl()
     var controller: MenuController?
@@ -58,7 +63,7 @@ class MenuView: UIViewController {
     }
 }
 
-extension MenuView: Designable{
+extension MenuView: Designable {
     func setUp() {
         self.view.backgroundColor = Colors.background
     }
@@ -69,7 +74,8 @@ extension MenuView: Designable{
         
         [statLabel,
          visitorsForm,
-         chatForm].forEach(scrollContentView.addSubview)
+         chatForm,
+         topViewers].forEach(scrollContentView.addSubview)
     }
     
     func makeConstrains() {
@@ -79,10 +85,9 @@ extension MenuView: Designable{
             make.bottom.equalToSuperview()
         }
         
-        scrollContentView.snp.makeConstraints { (make) in
+        scrollContentView.snp.makeConstraints { make in
             make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView.snp.width)
-            make.bottom.equalTo(chatForm.snp.bottom)
         }
         
         statLabel.snp.makeConstraints { make in
@@ -101,8 +106,12 @@ extension MenuView: Designable{
             make.leading.trailing.equalTo(statLabel)
             make.height.equalTo(350)
         }
+        
+        topViewers.snp.makeConstraints { make in
+            make.top.equalTo(chatForm.snp.bottom).offset(20)
+            make.leading.trailing.equalTo(statLabel)
+            make.height.equalTo(400)
+            make.bottom.equalToSuperview().inset(20)
+        }
     }
-    
-    
 }
-

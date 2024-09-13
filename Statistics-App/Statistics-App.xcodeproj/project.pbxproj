@@ -33,6 +33,8 @@
 		B617D10D2C92D62A00D721E1 /* dateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = B617D10C2C92D62A00D721E1 /* dateTime.swift */; };
 		B617D10F2C92E70300D721E1 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B617D10E2C92E70300D721E1 /* ChartView.swift */; };
 		B617D1132C93415B00D721E1 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = B617D1122C93415B00D721E1 /* DGCharts */; };
+		B6FC1E832C93C34600461439 /* TopViewers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC1E822C93C34600461439 /* TopViewers.swift */; };
+		B6FC1E852C93C53600461439 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC1E842C93C53600461439 /* TopCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,8 @@
 		B617D10A2C92D47E00D721E1 /* CustomCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCells.swift; sourceTree = "<group>"; };
 		B617D10C2C92D62A00D721E1 /* dateTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateTime.swift; sourceTree = "<group>"; };
 		B617D10E2C92E70300D721E1 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		B6FC1E822C93C34600461439 /* TopViewers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewers.swift; sourceTree = "<group>"; };
+		B6FC1E842C93C53600461439 /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,8 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				B617D1092C92D47200D721E1 /* Cells+Components */,
-				B617D0F02C92C01600D721E1 /* VisitorsFormView.swift */,
-				B617D1072C92D13D00D721E1 /* VisitorsСhart.swift */,
+				B6FC1E812C93C1FB00461439 /* VisitorsForm+chart */,
+				B6FC1E822C93C34600461439 /* TopViewers.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -227,9 +231,19 @@
 			isa = PBXGroup;
 			children = (
 				B617D10A2C92D47E00D721E1 /* CustomCells.swift */,
-				B617D10E2C92E70300D721E1 /* ChartView.swift */,
+				B6FC1E842C93C53600461439 /* TopCell.swift */,
 			);
 			path = "Cells+Components";
+			sourceTree = "<group>";
+		};
+		B6FC1E812C93C1FB00461439 /* VisitorsForm+chart */ = {
+			isa = PBXGroup;
+			children = (
+				B617D0F02C92C01600D721E1 /* VisitorsFormView.swift */,
+				B617D1072C92D13D00D721E1 /* VisitorsСhart.swift */,
+				B617D10E2C92E70300D721E1 /* ChartView.swift */,
+			);
+			path = "VisitorsForm+chart";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,11 +375,13 @@
 				B617CFFF2C9285F300D721E1 /* MenuView.swift in Sources */,
 				B617D0F12C92C01600D721E1 /* VisitorsFormView.swift in Sources */,
 				B617D1082C92D13D00D721E1 /* VisitorsСhart.swift in Sources */,
+				B6FC1E832C93C34600461439 /* TopViewers.swift in Sources */,
 				B617CFFB2C9285F300D721E1 /* AppDelegate.swift in Sources */,
 				B617D0462C9294C800D721E1 /* UsersModel.swift in Sources */,
 				B617D10F2C92E70300D721E1 /* ChartView.swift in Sources */,
 				B617D0EE2C92B87D00D721E1 /* MenuController.swift in Sources */,
 				B617D04D2C929C5A00D721E1 /* RealmModels.swift in Sources */,
+				B6FC1E852C93C53600461439 /* TopCell.swift in Sources */,
 				B617D0EB2C92B7F300D721E1 /* MenuAssembly.swift in Sources */,
 				B617D10B2C92D47E00D721E1 /* CustomCells.swift in Sources */,
 				B617D0432C92947E00D721E1 /* ViewersModel.swift in Sources */,
